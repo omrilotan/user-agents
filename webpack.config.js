@@ -1,7 +1,7 @@
 const path = require('path');
 
 const webpack = require('webpack');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin');
 
 
 const mode = process.env.NODE_ENV || 'development';
@@ -40,10 +40,10 @@ module.exports = {
   target: 'node',
   devtool: 'source-map',
   optimization: {
+    minimize: true,
     minimizer: [
-      new UglifyJsPlugin({
-        sourceMap: true,
-        uglifyOptions: {
+      new TerserPlugin({
+        terserOptions: {
           mangle: {
             reserved: [
               'Slice',
